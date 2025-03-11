@@ -1,3 +1,4 @@
+import { generateTokenAndSetCookie } from "../otros/generateTokens.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs"
 
@@ -5,23 +6,23 @@ import bcrypt from "bcryptjs"
 export const signup = async (req, res) => {
     try {
         const {fullName, username, email, password} = req.body;
-        const emailRegex= /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+        const emailRegex= /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; //el regex renovado
         if(!emailRegex.test(email)) {
-            return res.status(400).json({ error: "Invalid email format"})
+            return res.status(400).json({ error: "Invalid email format"}) //error
         }
-        const existingUser = await User.finOne({ username})
+        const existingUser = await User.findOne({ username}) //Comprobamos que no se repita usuario
         if(existingUser) {
-            return res.status(400).json({ error: "Username is already taken"})
+            return res.status(400).json({ error: "Username is already taken"}) //error
         }
-        const existingEmail = await User.finOne({ emmail})
+        const existingEmail = await User.findOne({ email}) // Comprobamos que no se repita mail
         if(existingEmail) {
-            return res.status(400).json({ error: "Email is already taken"})
+            return res.status(400).json({ error: "Email is already taken"}) //error
         }
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(password, salt)
 
         const newUser = new User({
-            fullname,
+            fullName,
             username,
             email,
             password:hashedPassword
@@ -33,20 +34,18 @@ export const signup = async (req, res) => {
 
             res.status(201).json({
                 _id: newUser._id,
-                fullname: newUser.fullname,
-                username: newUser.usarname,
+                fullName: newUser.fullName,
+                username: newUser.username,
                 email: newUser.email,
                 followers: newUser.followers,
-                following: newUserfollowing,
+                following: newUser.following,
                 profileImg: newUser.profileImg,
                 coverImg: newUser.coverImg,
             })
-        }else{
+        } else{
                 res.status(400).json({ error: "invalid user data"})
             }
-        }
-
-     catch (error) {
+        } catch (error) {
         console.log("Error in signup controller", error.message)
         res.status(500).json({ error: "Internal Server Error"})
     }
