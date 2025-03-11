@@ -6,10 +6,10 @@ import bcrypt from "bcryptjs"
 export const signup = async (req, res) => {
     try {
         const {fullName, username, email, password} = req.body;
-        const emailRegex= /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; //el regex renovado
+        /*const emailRegex= /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; //el regex renovado
         if(!emailRegex.test(email)) {
             return res.status(400).json({ error: "Invalid email format"}) //error
-        }
+        } */
         const existingUser = await User.findOne({ username}) //Comprobamos que no se repita usuario
         if(existingUser) {
             return res.status(400).json({ error: "Username is already taken"}) //error
@@ -27,9 +27,10 @@ export const signup = async (req, res) => {
             email,
             password:hashedPassword
         })
-
+console.log(email)
+console.log(newUser.email)
         if (newUser){
-            generateTokenAndSetCookie(newUser._id,res)
+            /* generateTokenAndSetCookie(newUser._id,res) */
             await newUser.save()
 
             res.status(201).json({
