@@ -76,7 +76,7 @@ export const getSuggestedUsers = async (req, res) => {
                 }
             },
             { $sample: { size: 4 } }, // Solo obtener 4 sugerencias directamente
-            { $project: { password: 0 } } // Excluimosla contraseña de los resultados
+            { $project: { password: 0 } } // Excluimos la contraseña de los resultados
         ]);
 
         res.status(200).json(users);
