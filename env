@@ -1,0 +1,7 @@
+MONGO_URI=mongodb+srv://fenixg12:l6HwAMTkVKU4qUPg@cluster0.3777e.mongodb.net/xcom3?retryWrites=true&w=majority&appName=Cluster0
+PORT=8000
+JWT_SECRET=7F4kPw7ujWG75tit65KOu/MyuIn9x37vh9bPzugw0ZA=
+NODE_ENV=development
+CLOUDINARY_CLOUD_NAME=dwuj79hzw
+CLOUDINARY_API_KEY=713965242671321
+CLOUDINARY_API_SECRET=nFksjrbZh61Tvcs40d1EM-WGB-E
