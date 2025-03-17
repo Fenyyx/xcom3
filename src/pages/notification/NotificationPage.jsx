@@ -27,7 +27,7 @@ const NotificationPage = () => {
 	const { mutate: deleteNotifications } = useMutation({
 		mutationFn: async () => {
 			try {
-				const res = await fetch("/api/notifications", {
+				const res = await fetch(`${import.meta.env.VITE_BACK_URL}/api/notifications`, {
 					method: "DELETE",
 				});
 				const data = await res.json();
