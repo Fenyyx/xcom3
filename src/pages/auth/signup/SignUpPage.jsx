@@ -23,7 +23,7 @@ const SignUpPage = () => {
 	const { mutate, isError, isPending, error } = useMutation({    //Usamos mutation para crear actualizar y eliminar y Query para fechear
 		mutationFn: async ({ email, username, fullName, password }) => {
 			try {
-				const res = await fetch("/api/auth/signup", {
+				const res = await fetch(`${import.meta.env.VITE_BACK_URL}/api/auth/signup`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
