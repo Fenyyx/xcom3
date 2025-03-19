@@ -9,6 +9,7 @@ const useFollow = () => {
 			try {
 				const res = await fetch(`${import.meta.env.VITE_BACK_URL}/api/users/follow/${userId}`, {
 					method: "POST",
+					credentials: "include",
 				});
 
 				const data = await res.json();

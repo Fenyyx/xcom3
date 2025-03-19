@@ -27,8 +27,9 @@ const LoginPage = () => {
 				const res = await fetch(`${import.meta.env.VITE_BACK_URL}/api/auth/login`, {
 					method: "POST",
 					headers: {
-						"Content-Type": "application/json",
+						"Content-Type": "application/json", 
 					},
+					credentials: "include",  // Importante: esto asegura que las cookies se incluyan
 					body: JSON.stringify({ username, password }),
 				});
 
@@ -40,6 +41,7 @@ const LoginPage = () => {
 			} catch (error) {
 				throw new Error(error);
 			}
+			
 		},
 		onSuccess: () => {
 			// refetch the authUser

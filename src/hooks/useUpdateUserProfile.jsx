@@ -9,6 +9,7 @@ const useUpdateUserProfile = () => {
 			try {
 				const res = await fetch(`${import.meta.env.VITE_BACK_URL}/api/users/update`, {
 					method: "POST",
+					credentials: "include",
 					headers: {
 						"Content-Type": "application/json",
 					},
